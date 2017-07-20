@@ -2,7 +2,7 @@ pipeline {
     
     agent any
     environment {
-        URI = 'test.local'
+        DEST_URI = 'test.local'
 
     }
     stages {
@@ -11,7 +11,7 @@ pipeline {
                 sshagent (credentials: ['sshjanka']) {
                     $echo '$Username'
                     sh 'ssh-add -l'
-                    sh 'ssh -o StrictHostKeyChecking=no -l $USERNAME $URI uname -a'
+                    sh 'ssh -o StrictHostKeyChecking=no -l $USERNAME $DEST_URI uname -a'
                 }
 
                 /*
