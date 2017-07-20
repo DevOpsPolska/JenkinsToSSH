@@ -2,12 +2,18 @@ pipeline {
     
     agent any
     environment {
-        TEST_VARIABLE = 'test'
+        URI = 'test.local'
+
     }
     stages {
         stage('copy') {
             steps{
-                ssh 'ssk'
+                sshagent (credentials: ['sshjanka']) {
+                    $echo '$Username'
+                    sh 'ssh-add -l'
+                    sh 'ssh -o StrictHostKeyChecking=no -l $USERNAME $URI uname -a'
+                }
+
                 /*
                 withCredentials([]) {
                     //sh ‘ssh user@server mkdir -p /var/www/temp_deploy’
