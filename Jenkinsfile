@@ -9,7 +9,7 @@ pipeline {
         stage('copy') {
             steps{
                 sshagent (credentials: ['sshjanka']) {
-                    $echo '$Username'
+                    echo '$Username'
                     sh 'ssh-add -l'
                     sh 'ssh -o StrictHostKeyChecking=no -l $USERNAME $DEST_URI uname -a'
                 }
